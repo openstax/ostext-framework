@@ -1,0 +1,192 @@
+/*
+1. create abstraction between declaration and selectors
+2. allow for alternative styles by (other theme-layer)
+3. switch themes by use of single variable
+4. style an exercise differently when it is in an example, a note, end-of-chapter
+5. tweak an existing template
+   a. add a font to a Note
+   b. change the color of a note
+
+Bonus: finding unused code (variables, simple typos), make useful Coverage information
+*/
+/*
+abstraction can be achieved both via mixin naming conventions and folder structure
+
+selectors are defined as part of the foundation in the mixins, the theme only calls the appropriate mixin
+
+styles are defined via maps
+
+link betwwen map and mixin could be more obvious.
+*/
+/*
+1. create abstraction between declaration and selectors
+2. allow for alternative styles by (other theme-layer)
+3. switch themes by use of single variable
+4. style an exercise differently when it is in an example, a note, end-of-chapter
+5. tweak an existing template
+   a. add a font to a Note
+   b. change the color of a note
+
+Bonus: finding unused code (variables, simple typos), make useful Coverage information
+*/
+/*
+use compass
+access external modules for convenience
+draw back: depend
+*/
+/* line 5, ../../../.rvm/gems/ruby-2.1.3/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../.rvm/gems/ruby-2.1.3/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../.rvm/gems/ruby-2.1.3/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../.rvm/gems/ruby-2.1.3/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../.rvm/gems/ruby-2.1.3/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../.rvm/gems/ruby-2.1.3/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../.rvm/gems/ruby-2.1.3/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../.rvm/gems/ruby-2.1.3/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../.rvm/gems/ruby-2.1.3/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 2, ../sass/foundation/utils/_global.scss */
+[data-type="metadata"], [data-type="cnx.flag.introduction"], [data-type="cnx.eoc"] {
+  display: none;
+}
+
+/*
+use maps, draw back: must use , instead of ;
+a habit hard to break ;P
+*/
+/*
+we can split those in a separate file for more separation
+
+Naming scheme could be refined, but roughly, as follows:
+  SourceFile_part_element ()
+  the location is in the mixin variables
+*/
+/* line 4, ../sass/foundation/content/_content_titles.scss */
+[data-type="chapter"] > [data-type="document-title"] {
+  font-size: 4.23607em;
+  color: #151;
+}
+
+/* line 4, ../sass/foundation/content/_content_titles.scss */
+[data-type="page"] > [data-type="document-title"] {
+  font-size: 2.61803em;
+  color: #368;
+}
+
+/* line 13, ../sass/foundation/content/_content_titles.scss */
+[data-type="note"].note .title {
+  font-size: 1.61803em;
+  color: #368;
+  font-weight: bold;
+}
+
+/* line 14, ../sass/foundation/content/_content_exercises.scss */
+[data-type="example"] .exercise {
+  background: #151;
+  border: solid 5px #368;
+  margin: 10px;
+}
+
+/* line 14, ../sass/foundation/content/_content_exercises.scss */
+[data-type="note"] .exercise {
+  border: solid 5px #333;
+  padding: 10px;
+}
+
+/* line 14, ../sass/foundation/content/_content_exercises.scss */
+[data-type="note"] .exercise {
+  border: solid 5px #333;
+  padding: 10px;
+}
+
+/* line 4, ../sass/foundation/eoc/_eoc_exercises.scss */
+.eoc .free-response .exercise {
+  background: #151;
+  padding: 10px;
+}
+
+/* line 6, ../sass/foundation/content/_content_exercises.scss */
+.eoc .practice .exercise {
+  background: #368;
+  padding: 10px;
+}
+
+/*
+theme styles can be overwritten at the book level
+
+draw back, the mixin needs to be called again to overwrite theme, there might be a better way to do this
+
+book specific mixins can be invoked only at the book level if needed
+*/
+/* line 13, ../sass/foundation/content/_content_titles.scss */
+[data-type="note"].try .title {
+  font-size: 1.61803em;
+  color: #368;
+  font-weight: bold;
+}
+
+/* line 14, ../sass/foundation/content/_content_exercises.scss */
+[data-type="try"] .exercise {
+  background: orange;
+  border: solid 5px green;
+}
+
+/* line 14, ../sass/foundation/content/_content_exercises.scss */
+[data-type="example"] .exercise {
+  background: darkgreen;
+  border: none;
+}

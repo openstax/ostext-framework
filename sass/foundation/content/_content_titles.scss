@@ -1,0 +1,17 @@
+@import '../utils/utils';
+@mixin content_parts_title($decl, $data-type, $part: null)  {
+  [data-type="#{$data-type}"] {
+    > [data-type="document-title"] {
+      @include util_declartions ($decl);
+    }
+  }
+}
+
+//mixins/selectors would need to be a bit more robust to avoid overlapping
+@mixin content_notes_title($decl, $note-type)  {
+  [data-type="note"].#{$note-type} {
+    .title {
+      @include util_declartions ($decl);
+    }
+  }
+}

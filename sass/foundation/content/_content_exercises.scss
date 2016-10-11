@@ -1,0 +1,19 @@
+@import '../utils/utils';
+@mixin content_exercise($decl, $container, $part: null) {
+  @if ($part  != null) {
+    .#{$part} {
+      .#{$container}  {
+        .exercise {
+          @include util_declartions ($decl);
+        }
+      }
+    }
+  }
+  @else {
+    [data-type="#{$container}"] {
+      .exercise {
+        @include util_declartions ($decl);
+      }
+    }
+  }
+}

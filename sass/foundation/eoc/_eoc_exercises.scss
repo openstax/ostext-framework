@@ -1,0 +1,9 @@
+@mixin EOC_exercise($decl, $container, $part: null)  {
+  .eoc{
+    .#{$container}{
+      .exercise {
+        @include util_declartions ($decl);
+      }
+    }
+  }
+}

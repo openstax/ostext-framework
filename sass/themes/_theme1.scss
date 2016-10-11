@@ -1,0 +1,87 @@
+/*
+1. create abstraction between declaration and selectors
+2. allow for alternative styles by (other theme-layer)
+3. switch themes by use of single variable
+4. style an exercise differently when it is in an example, a note, end-of-chapter
+5. tweak an existing template
+   a. add a font to a Note
+   b. change the color of a note
+
+Bonus: finding unused code (variables, simple typos), make useful Coverage information
+*/
+/*
+use compass
+access external modules for convenience
+draw back: depend
+*/
+@import 'modular-scale';
+@import 'compass/reset';
+@import '_variables';
+@import '../foundation/utils/global';
+@import '../foundation/content/content_exercises';
+@import '../foundation/eoc/eoc_exercises';
+@import '../foundation/content/content_titles';
+
+/*
+use maps, draw back: must use , instead of ;
+a habit hard to break ;P
+*/
+
+$chapterTitleStyles: (
+  font-size: ms(3),
+  color: $primary-color,
+);
+$pageTitleStyles: (
+  font-size: ms(2),
+  color: $secondary-color,
+);
+$noteTitleStyles: (
+  font-size: ms(1),
+  color: $secondary-color,
+  font-weight: bold,
+);
+
+$example_exercise: (
+  background: $primary-color,
+  border: solid 5px $secondary-color,
+  margin: 10px,
+);
+
+$note_exercise: (
+  border: solid 5px $dark-grey,
+  padding: 10px,
+);
+
+$practice_exercise: (
+  background: $secondary-color,
+  padding: 10px,
+);
+
+$free_response: (
+  background: $primary-color,
+  padding: 10px,
+);
+
+/*
+we can split those in a separate file for more separation
+
+Naming scheme could be refined, but roughly, as follows:
+  SourceFile_part_element ()
+  the location is in the mixin variables
+*/
+
+@include content_parts_title($chapterTitleStyles, chapter);
+@include content_parts_title($pageTitleStyles, page);
+@include content_notes_title($noteTitleStyles, note);
+
+
+
+@include content_exercise($example_exercise, example);
+@include content_exercise($note_exercise, note);
+@include content_exercise($note_exercise, note);
+
+//use folders for sorting
+@include EOC_exercise($free_response, free-response );
+
+//another way to abstract location, declaration, type, part (may need to not use content in this case ;-) )
+@include content_exercise($practice_exercise, practice, eoc);

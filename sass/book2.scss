@@ -1,0 +1,49 @@
+/*
+1. create abstraction between declaration and selectors
+2. allow for alternative styles by (other theme-layer)
+3. switch themes by use of single variable
+4. style an exercise differently when it is in an example, a note, end-of-chapter
+5. tweak an existing template
+   a. add a font to a Note
+   b. change the color of a note
+
+Bonus: finding unused code (variables, simple typos), make useful Coverage information
+*/
+
+
+
+@import './themes/theme1';
+
+$example_exercise: (
+  background: fuchsia,
+  border: none,
+);
+
+@include content_exercise($example_exercise, example);
+
+
+
+
+
+
+/*
+themes could be achieved via --load-path
+not a very good solution but something to be invist
+    hotdog
+        _variables.scss
+    classic
+        _variables.scss
+styles.scss
+
+Your styles.scss should have import paths that are relative to the provided load-path(s):
+
+// note the import here doesn't contain themes, hotdog, or classic
+@import "variables";
+
+@debug $foo;
+
+
+# hotdog
+sass styles.scss hotdog.css --load-path ./themes/hotdog/
+# classic
+sass styles.scss classic.css --load-path ./themes/classic/*/

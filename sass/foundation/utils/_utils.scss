@@ -1,0 +1,5 @@
+@mixin util_declartions ($values) {
+  @each $key, $value in $values {
+    #{$key}: $value;
+  }
+}

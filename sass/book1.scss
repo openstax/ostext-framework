@@ -1,0 +1,54 @@
+/*
+1. create abstraction between declaration and selectors
+2. allow for alternative styles by (other theme-layer)
+3. switch themes by use of single variable
+4. style an exercise differently when it is in an example, a note, end-of-chapter
+5. tweak an existing template
+   a. add a font to a Note
+   b. change the color of a note
+
+Bonus: finding unused code (variables, simple typos), make useful Coverage information
+*/
+
+
+
+/*
+abstraction can be achieved both via mixin naming conventions and folder structure
+
+selectors are defined as part of the foundation in the mixins, the theme only calls the appropriate mixin
+
+styles are defined via maps
+
+link betwwen map and mixin could be more obvious.
+*/
+
+
+
+
+
+@import './themes/theme1';
+/*
+theme styles can be overwritten at the book level
+
+draw back, the mixin needs to be called again to overwrite theme, there might be a better way to do this
+
+book specific mixins can be invoked only at the book level if needed
+*/
+
+$tryTitleStyles: (
+  font-size: ms(1),
+  color: $secondary-color,
+  font-weight: bold,
+);
+
+$try_exercise: (
+  background: orange,
+  border: solid 5px green,
+);
+$example_exercise: (
+  background: darkgreen,
+  border: none,
+);
+@include content_notes_title($tryTitleStyles, try);
+@include content_exercise($try_exercise, try);
+@include content_exercise($example_exercise, example);
